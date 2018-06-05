@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+      .title {
+        height: 40px;
+        border: 1px solid rgb(186, 28, 63);
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="contain">
+      <div class="title"></div>
+      </div>
+      <h2>表单++++++++++++++++++++++++++</h2>
+      <button type="button" name="button" id="bt">获取</button>
+  </body>
+  <script src="./jquery.js" charset="utf-8"></script>
+  <script src="./template.js" charset="utf-8"></script>
+  <script type="text/html" id="template">
+     {{each message as value i}}
+        <!-- <div class="title">标题:{{i}}===={{value.title}}</div> -->
+        <div class="box" style="{{value.urlImg}}"></div>
+        <!-- <p><h2>{{value.title}}</h2><span>{{value.des}}</span></p> -->
+        <div class="contain">
+          <!-- {{value.content}} -->
+        </div>
+    {{/each}}
+
+  </script>
+  <script type="text/javascript">
+    var bt = document.querySelector('#bt');
+    var contain = document.getElementsByClassName('contain')[0];
+    bt.onclick = function(){
+      var xhr = new XMLHttpRequest();
+      xhr.open('get','http://localhost:3000/getBg',true);
+      xhr.send(null);
+      xhr.onreadystatechange=function(){
+        if (xhr.readyState==4 && xhr.status==200) {
+          // var titles = JSON.parse(xhr.responseText);
+          var datas = JSON.parse(xhr.responseText);
+          console.log(datas);
+          // var html = template('template',datas);
+          // contain.innerHTML = html;
+        }
+      }
+    }
+  </script>
+</html>
